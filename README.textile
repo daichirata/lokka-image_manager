@@ -1,0 +1,19 @@
+h1.ImageManager
+
+It is plug-in which do management of a picture and thumbnail.
+
+h2.Todo
+
+h3.Improvement of UI
+
+h3.Correspondence to the service of those other than Picasa.
+
+* "フォト蔵":http://photozou.jp/
+* "Hatenafotolife":http://f.hatena.ne.jp/
+
+etc..
+
+
+
+
+

@@ -4,7 +4,6 @@ module Lokka
       module Picasa
         def self.auth?
           @@picasa ||= ::Picasa::Picasa.new
-
           unless @@picasa.picasa_session.nil?
             return true
           end
