@@ -1,0 +1,28 @@
+%link(rel="stylesheet" href="/plugin/lokka-image_manager/assets/stylesheets/style.css" type="text/css")
+%script(src="/plugin/lokka-image_manager/assets/javascripts/script.js" type="text/javascript")
+
+%h2= t('image_manager.picasa.account_setting')
+
+#image-uploader-wrap.clearfix
+  #image-uploader-aside
+    %h3= link_to t('image_manager.link.image_manager'), "/admin/plugins/image_manager"
+    %h3= link_to t("image_manager.link.thumbnail"), "/admin/plugins/image_manager/thumbnail"
+    %h3= t("image_manager.link.settings")
+
+  #image-uploader-content
+    %form{:action => '/admin/plugins/image_manager/settings/picasa', :method => 'post'}
+      %input{:type => 'hidden', :name => '_method', :value => 'post'}
+        .field
+          %label{:for => 'picasa_email'}=t('image_manager.picasa.email')
+          %br
+          %input{:type => 'text', :id => 'picasa_email', :name => 'picasa_email', :value => Option.image_manager_picasa_email}
+        .field
+          %label{:for => 'picasa_password'}=t('image_manager.picasa.password')
+          %br
+          %input{:type => 'password', :id => 'picasa_password', :name => 'picasa_password', :value => Option.image_manager_picasa_password}
+        .field
+          %label{:for => 'picasa_album'}=t('image_manager.picasa.album')
+          %br
+          %input{:type => 'text', :id => 'picasa_album', :name => 'picasa_album', :value => Option.image_manager_picasa_album}
+        .field
+          %input{:type => 'submit', :value => t.new}

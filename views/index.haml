@@ -1,0 +1,40 @@
+%link(rel="stylesheet" href="/plugin/lokka-image_manager/assets/stylesheets/style.css" type="text/css")
+%script(src="/plugin/lokka-image_manager/assets/javascripts/script.js" type="text/javascript")
+
+%h2= t("image_manager.image_manager.index")
+
+#image-uploader-wrap.clearfix
+  #image-uploader-aside
+    %ul#image-manager-link.mgn-none
+      %h3= t('image_manager.link.image_manager')
+      %li
+        %h3= link_to t("image_manager.link.thumbnail"), "/admin/plugins/image_manager/thumbnail"
+      %li
+        %h3= link_to t("image_manager.link.settings"), "/admin/plugins/image_manager/settings"
+
+  #image-uploader-content
+    #uploader
+      %form{:action => "/admin/plugins/image_manager/upload", :method => 'post', :enctype => 'multipart/form-data'}
+        %select{:class => "thumbnail-service-select", :name => "service"}
+          - services.each do |service|
+            %option{:vale => service}= service.capitalize
+        %input{:type => 'file', :class => 'file-uploader file-uploader-l', :name => 'file'}
+        %input{:type => 'submit', :value => t('image_manager.save'), :class => "mgn-none"}
+
+    %hr.bdr-dashed
+
+    #upload-images.clearfix
+      %p.mgn-none
+        %span= t("image_manager.image_manager.description")
+        %input{:type => "text", :id => "images_code", :readonly => "readonly"}
+      %p
+        = link_to t('image_manager.image_manager.new'), "/admin/plugins/image_manager"
+        = "/"
+        = link_to t('image_manager.image_manager.old'), "/admin/plugins/image_manager?order=old"
+      - if @images
+        %ul.image-list
+          - @images.each do |image|
+            %li
+              %img{:class => "images", :src => image.thumbnail.url, :alt => image.url}
+              %p.img-service= image.service.capitalize
+

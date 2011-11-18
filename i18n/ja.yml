@@ -1,0 +1,49 @@
+ja:
+  image_manager:
+    file_uploader: "画像選択"
+    save: "登録"
+    edit: "登録/更新"
+    delete: "削除"
+    status: "状態"
+    link:
+      image_manager: "画像管理"
+      thumbnail: "サムネイル"
+      settings: "外部サービス"
+
+    image_manager:
+      index: "画像管理"
+      new: "新しい順"
+      old: "古い順"
+      description: "画像をクリックすると貼付用のコードが表示されます"
+
+    thumbnail:
+      index: "サムネイル設定"
+      description: "記事にサムネイルが登録されていない場合、カテゴリが設定されていればそのカテゴリの画像が表示されます。<br>
+                    カテゴリに画像が設定されていない場合は未設定用の画像が表示されます"
+      post: "記事"
+      category: "カテゴリー"
+      noimage: "未設定用画像"
+
+    settings:
+      choose_service: "サービスを選択して下さい"
+      service: "外部サービス"
+      account_register: "アカウント認証"
+
+    flash:
+      auth_success: "認証が完了しました"
+      auth_fail: "認証に失敗しました"
+      upload_success: "アップロードが完了しました"
+      upload_fail: "アップロードに失敗しました"
+      delete_success: "削除が完了しました"
+
+    picasa:
+      name: "Picasa Webアルバム"
+      account_setting: "アカウント設定 - Picasa"
+      uploads: "ファイル選択 - Picasa"
+      email: "メールアドレス"
+      password: "パスワード"
+      album: "アルバム名"
+      title: "タイトル"
+      description: "ディスクリプション"
+      file: "ファイル"
+

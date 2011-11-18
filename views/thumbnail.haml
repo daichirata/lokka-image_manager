@@ -1,0 +1,81 @@
+%link(rel="stylesheet" href="/plugin/lokka-image_manager/assets/stylesheets/style.css" type="text/css")
+%script(src="/plugin/lokka-image_manager/assets/javascripts/script.js" type="text/javascript")
+
+%h2= t("image_manager.thumbnail.index")
+
+#image-uploader-wrap.clearfix
+  #image-uploader-aside
+    %h3= link_to t('image_manager.link.image_manager'), "/admin/plugins/image_manager"
+    %h3= t("image_manager.link.thumbnail")
+    %h3= link_to t("image_manager.link.settings"), "/admin/plugins/image_manager/settings"
+
+  #image-uploader-content
+    %p=  t('image_manager.thumbnail.description')
+
+    %div(class="inline button tab-post")=     t('image_manager.thumbnail.post')
+    %div(class="inline button tab-category")= t('image_manager.thumbnail.category')
+    %div(class="inline button tab-noimage")=  t('image_manager.thumbnail.noimage')
+
+    #thumb-table-group
+      #thumbnail-post
+        %table
+          %tr
+            %th= t("post.title")
+            %th= t("image_manager.file_uploader")
+            %th= t("image_manager.status")
+          - @entries.each_with_index do |entry, i|
+            %tr{:class => (i + 1).odd? ? 'odd' : 'even'}
+              %td.title= link_to entry.title, entry.link
+              %td(style="width:330px;")
+                %form{:action => "/admin/plugins/image_manager/thumbnail", :method => 'post', :enctype => 'multipart/form-data'}
+                  %select{:name => "service"}
+                    - services.each do |service|
+                      %option{:vale => service}= service.capitalize
+                  %input{:type => 'file', :class => 'file-uploader file-uploader-s', :name => 'file', :style => "width:150px;"}
+                  %input{:type => 'hidden', :name => 'target', :value => 'post'}
+                  %input{:type => 'hidden', :name => 'id', :value => entry.id}
+                  %input{:type => 'submit', :value => t('image_manager.edit'), :class => "mgn-none"}
+              %td= thumbnail(:id => entry.id, :height => '50', :width => '50')
+        .pager
+          %ul
+            - if @entries.pager.previous_page
+              %li.previous= link_to t('previous'), "?page=#{@entries.pager.previous_page}"
+            - if @entries.pager.next_page
+              %li.next= link_to t('next'), "?page=#{@entries.pager.next_page}"
+
+      #thumbnail-category(style="display:none")
+        %table
+          %tr
+            %th= t('category.title')
+            %th= t("image_manager.file_uploader")
+            %th= t("image_manager.status")
+          - @categories.each do |category|
+            %tr
+              %td= link_to category.title, "/admin/categories/#{category.id}/edit"
+              %td(style="width:330px;")
+                %form{:action => "/admin/plugins/image_manager/thumbnail", :method => 'post', :enctype => 'multipart/form-data'}
+                  %select{:name => "service"}
+                    - services.each do |service|
+                      %option{:vale => service}= service.capitalize
+                  %input{:type => 'file', :class => 'file-uploader file-uploader-s', :name => 'file', :style => "width:150px;"}
+                  %input{:type => 'hidden', :name => 'target', :value => 'category'}
+                  %input{:type => 'hidden', :name => 'id', :value => category.id}
+                  %input{:type => 'submit', :value => t('image_manager.edit'), :class => "mgn-none"}
+              %td=thumbnail(:id => category.id, :height => '50', :width => '50', :target => 'category')
+
+      #thumbnail-noimage(style="display:none")
+        %table
+          %tr
+            %th= t("image_manager.file_uploader")
+            %th= t("image_manager.status")
+          %tr
+            %td(style="width:330px;")
+              %form{:action => "/admin/plugins/image_manager/thumbnail", :method => 'post', :enctype => 'multipart/form-data'}
+                %select{:name => "service"}
+                  - services.each do |service|
+                    %option{:vale => service}= service.capitalize
+                %input{:type => 'file', :class => 'file-uploader file-uploader-s', :name => 'file', :style => "width:150px;"}
+                %input{:type => 'hidden', :name => 'target', :value => 'noimage'}
+                %input{:type => 'submit', :value => t('image_manager.edit'), :class => "mgn-none"}
+            %td= thumbnail(:height => '50', :width => '50', :target => 'noimage')
+
